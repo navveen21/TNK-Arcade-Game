@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<title>TNK Games Arena - Multi-Game Web Arcade</title>
+<link rel="stylesheet" href="styles.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+<!-- Google AdSense Script Placeholder -->
+<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+<script src="/_aistudio-iframe.js?v=1f94f900"></script></head>
+<body>
+
+  <!-- Confetti Celebration Layer -->
+  <canvas id="celebrationCanvas"></canvas>
+
+  <!-- TOP BANNER (Identical on all screens) -->
+  <header class="tnk-banner">
+    <div class="logo-container" onclick="showHubView()">
+      <div class="logo-badge">TNK</div>
+      <div class="logo-text-group">
+        <span class="logo-title">TNK Arena</span>
+        <span class="logo-subtitle">GAME IT ENHANCE YOUR MIND</span>
+      </div>
+    </div>
+
+    <div class="banner-actions">
+      <div class="wallet-chip">
+        <span>🪙</span>
+        <span id="topWalletBalance" class="wallet-amount">100</span>
+        <span style="font-size:11px; color:var(--text-secondary); text-transform:uppercase;">Coins</span>
+      </div>
+      <button class="btn btn-gold" onclick="AdBridge.showRewardedAd()" style="font-size:11px; padding:4px 10px;" title="Watch a sponsored ad to earn 50 free coins">
+        📺 +50 Coins (Ad)
+      </button>
+      <button id="btnNavHub" class="btn btn-secondary" onclick="showHubView()" style="display:none;">🏠 Game Hub</button>
+      <button class="btn btn-secondary" onclick="openNameModal()">✏️ Names</button>
+    </div>
+  </header>
+
+  <!-- ================= TOP ADSENSE BANNER CONTAINER ================= -->
+  <div class="adsense-slot-wrapper top-ad-slot">
+    <div class="adsense-placeholder">
+      <span class="ad-label">ADVERTISEMENT</span>
+      <p class="ad-subtext">Google AdSense Space (Responsive Leaderboard 728x90 / Top Banner)</p>
+    </div>
+  </div>
+
+  <!-- ================= VIEW 1: HOME PAGE GAMES HUB ================= -->
+  <main id="homeHubView">
+    <div class="hub-hero">
+      <div class="hub-hero-badge">⚡ Cyber Arcade Portal</div>
+      <h1 class="hub-hero-title">Select Your Game</h1>
+      <p class="hub-hero-subtitle">
+        Tactical Cyber Arcades with Player vs Computer AI & 2-Player Pass-and-Play
+      </p>
+    </div>
+
+    <!-- 1. MAIN FEATURED GAME: COIN TO WIN (PULI-MAKA) -->
+    <section class="main-featured-game">
+      <div class="featured-content-grid">
+        <div class="featured-details">
+          <div class="featured-header-badge">
+            <span>👑 MAIN FEATURED GAME</span>
+            <span>•</span>
+            <span>37-NODE TACTICAL GRAPH</span>
+          </div>
+          <h2 class="featured-title">
+            <span>🐅 Coin to Win (Puli-Maka)</span>
+          </h2>
+          <p class="featured-desc">
+          </p>
+
+          <!--<div class="featured-chips">
+            <span class="featured-chip">🐅 2 Tigers vs 24 Coins</span>
+            <span class="featured-chip">🤖 Player vs Computer</span>
+            <span class="featured-chip">⚔️ 2P Pass & Play</span>
+            <span class="featured-chip">🪙 150 Moves Cap</span>
+            <span class="featured-chip">⏱️ 90s Turn Clock</span>
+          </div>-->
+
+          <div class="featured-actions">
+            <button class="btn btn-gold" style="font-size:14px; padding:10px 22px;" onclick="launchGame('pulimaka')">
+              ▶ PLAY COIN TO WIN NOW
+            </button>
+            <button class="btn btn-secondary" style="font-size:12px; padding:8px 16px;" onclick="launchGameWithMode('pulimaka', 'AI')">
+              🤖 Vs Computer
+            </button>
+            <button class="btn btn-secondary" style="font-size:12px; padding:8px 16px;" onclick="launchGameWithMode('pulimaka', '2P')">
+              👥 2 Players
+            </button>
+          </div>
+        </div>
+
+        <div class="featured-visual" onclick="launchGame('pulimaka')" style="cursor:pointer;" title="Click to launch Coin to Win">
+          <!-- Stylized Mini Vector Board Preview -->
+          <div style="background:rgba(10,16,36,0.9); border:2px solid #f59e0b; border-radius:16px; padding:18px 24px; text-align:center; box-shadow:0 0 25px rgba(245,158,11,0.3); width:100%; max-width:280px;">
+            <div style="font-size:54px; margin-bottom:6px; filter:drop-shadow(0 0 16px rgba(245,158,11,0.7));">🐅</div>
+            <div style="font-size:16px; font-weight:900; color:#f59e0b; font-family:'Orbitron', monospace; letter-spacing:1px;">
+              37-NODE ARENA
+            </div>
+            <div style="font-size:11px; color:#cbd5e1; margin-top:4px;">
+              2 Hunters vs 24 Coins
+            </div>
+            <div style="margin-top:12px; display:inline-block; padding:4px 14px; background:rgba(245,158,11,0.2); border:1px solid #f59e0b; border-radius:20px; font-size:10px; font-weight:800; color:#fbbf24; font-family:'Orbitron', monospace;">
+              TAP TO PLAY ▶
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. HORIZONTAL SCROLLER FOR OTHER GAMES -->
+    <section class="scroller-section">
+      <div class="scroller-section-header">
+        <div class="scroller-section-title">
+          <span>🎮 More Arcade Games</span>
+          <span style="font-size:11px; color:var(--text-secondary); font-weight:600; text-transform:none;">(Swipe or scroll horizontally →)</span>
+        </div>
+        <div class="scroller-nav-buttons">
+          <button class="scroller-arrow-btn" onclick="scrollGamesTrack(-1)" aria-label="Scroll Left">◀</button>
+          <button class="scroller-arrow-btn" onclick="scrollGamesTrack(1)" aria-label="Scroll Right">▶</button>
+        </div>
+      </div>
+
+      <div class="horizontal-games-track" id="horizontalGamesTrack">
+        <!-- Game 1: Cyber Neon Ludo (With New Cyberpunk Image Banner!) -->
+        <div class="horizontal-game-card" onclick="launchGame('ludo')">
+          <div class="game-card-img-banner">
+            <img src="images/ludo_banner.jpg" alt="Cyber Neon Ludo" class="game-card-img" />
+            <div class="game-card-img-overlay"></div>
+            <span class="game-card-tag" style="color:#00ff88; border-color:#00ff88;">Cyber Ludo</span>
+          </div>
+          <div class="game-card-body">
+            <div class="game-card-title">Cyber Neon Ludo</div>
+            <div class="game-card-desc">15x15 Circuit board with dynamic 3D-styled dice, pawn-hopping animations, and screen-shake captures!</div>
+            <div class="game-card-meta">
+              <span class="game-card-rules">2P, 3P, 4P • Vs Bot AI • 3D Dice</span>
+              <button class="btn btn-neon-blue">Play Now ▶</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game 2: Cyber Neon Tic-Tac-Toe -->
+        <div class="horizontal-game-card" onclick="launchGame('tictactoe')">
+          <div class="game-card-banner neon-banner">
+            <span class="game-card-icon">⭕</span>
+            <span class="game-card-tag" style="color:#00f3ff; border-color:#00f3ff;">Cyber Grid</span>
+          </div>
+          <div class="game-card-body">
+            <div class="game-card-title">Cyber Neon Tic-Tac-Toe</div>
+            <div class="game-card-desc">Futuristic arcade grid with glowing cyan X and neon pink O. Play 3x3, 4x4, or 5x5 against Neural AI or friends!</div>
+            <div class="game-card-meta">
+              <span class="game-card-rules">3x3, 4x4, 5x5 • Vs AI / 2P • 45s Timer</span>
+              <button class="btn btn-neon-blue">Play Now ▶</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= VIEW 2: GAME ARENA ================= -->
+  <main id="gameArenaView" style="display:none;">
+    <div class="arena-topbar">
+      <div class="arena-title-group">
+        <button class="btn btn-secondary" onclick="showHubView()">← Back to Hub</button>
+        <span id="arenaGameTitle" class="arena-game-name">Game Title</span>
+
+        <!-- Level Selector for Tic-Tac-Toe (3x3, 4x4, 5x5) -->
+        <div id="gridSizeSelector" class="grid-size-selector" style="display:none;">
+          <button class="size-btn active" onclick="TicTacToeGame.setLevel(3)">3 × 3</button>
+          <button class="size-btn" onclick="TicTacToeGame.setLevel(4)">4 × 4</button>
+          <button class="size-btn" onclick="TicTacToeGame.setLevel(5)">5 × 5</button>
+        </div>
+
+        <!-- Mode Toggle (2-Player Duel vs Player vs Computer) -->
+        <div class="mode-toggle-group">
+          <button id="btnMode2P" class="size-btn active" onclick="setMatchMode('2P')">2 Players</button>
+          <button id="btnModeAI" class="size-btn" onclick="setMatchMode('AI')">🤖 Vs Computer</button>
+        </div>
+      </div>
+      <div>
+        <button class="btn btn-gold" onclick="ActiveGame.reset()">↻ Reset Game</button>
+      </div>
+    </div>
+
+    <div class="game-container">
+      <!-- BOARD STAGE -->
+      <section class="board-stage">
+        <div class="board-header">
+          <div id="turnBadge" class="turn-pill turn-p1">
+            <span>🐅</span>
+            <span id="turnText">Turn: Player 1</span>
+          </div>
+
+          <!-- Countdown Timer (Used by Tic-Tac-Toe & Coin to Win) -->
+          <div id="arenaTimerBox" class="timer-box">
+            <span style="font-size:13px;">⏱️</span>
+            <div class="timer-progress-wrap">
+              <div id="timerProgressBar" class="timer-progress-bar"></div>
+            </div>
+            <span id="timerClockDisplay" class="timer-clock">Waiting</span>
+          </div>
+
+          <!-- HANDY TOP DICE BAR (Always visible in Board Header during Ludo — No Scrolling Needed!) -->
+          <div id="headerLudoDiceBar" style="display:none; align-items:center; gap:10px; background:rgba(16,22,38,0.95); border:1.5px solid #00f3ff; padding:4px 12px; border-radius:12px; box-shadow:0 0 15px rgba(0,243,255,0.25);">
+            <span id="headerDiceResult" style="font-size:15px; font-weight:900; color:#00f3ff; min-width:72px; text-align:center;">🎲 Ready</span>
+            <button onclick="LudoGame.rollDice()" class="btn btn-gold" style="font-size:13px; padding:6px 14px; border-radius:8px;">
+              🎲 Roll Dice
+            </button>
+          </div>
+
+          <div id="statusPrompt" class="status-prompt">Awaiting on-board start</div>
+        </div>
+
+        <div class="stage-canvas-wrapper" id="boardStageWrapper">
+          <!-- ON-BOARD ACTIVATION OVERLAY -->
+          <div id="boardStartOverlay" class="board-overlay-lock">
+            <h2 id="overlayTitle" style="font-size:26px; font-weight:900; color:#00f3ff; text-transform:uppercase;">Game Ready</h2>
+            <p style="font-size:13px; color:#cbd5e1;">Click below to activate and unlock the board</p>
+            <button class="btn btn-neon-blue" style="font-size:15px; padding:12px 28px;" onclick="triggerStartGameOnBoard()">
+              ▶ Start Game on Board
+            </button>
+          </div>
+
+
+          <!-- CYBER NEON LUDO STAGE (Sized to fit mobile viewport dynamically) -->
+          <div id="ludoStageWrapper" class="ludo-stage-wrapper">
+            <div id="board-grid" class="ludo-grid"></div>
+          </div>
+          <!-- NEON TIC-TAC-TOE BOARD (3x3, 4x4, 5x5) -->
+          <div id="neonGridContainer" style="display:none;"></div>
+
+          <!-- PULI-MAKA SVG BOARD -->
+          <svg id="boardSvg" class="board-svg" viewBox="-60 -60 1020 620" style="display:none;">
+            <defs>
+              <filter id="p1Glow"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#ef4444" flood-opacity="0.8"/></filter>
+              <filter id="p2Glow"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#00f3ff" flood-opacity="0.8"/></filter>
+            </defs>
+            <g id="edgesGroup"></g>
+            <g id="nodesGroup"></g>
+          </svg>
+        </div>
+      </section>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <!-- HANDY SIDEBAR DICE DOCK (Right beside the board — zero scrolling required!) -->
+        <div id="sidebarLudoDiceCard" class="card" style="display:none; border-color:#00f3ff; box-shadow:0 0 20px rgba(0,243,255,0.2);">
+          <div class="card-title" style="margin-bottom:8px;">
+            <span>🎲 Handy Dice Controller</span>
+            <span id="sidebarLudoTurnName" style="color:#ff2a5f; font-weight:800;">Player 1</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; background:var(--bg-inner); padding:12px; border-radius:10px; border:1px solid #1c2a44;">
+            <div id="sidebarDiceResult" style="font-size:22px; font-weight:900; color:#00f3ff;">🎲 Ready</div>
+            <button onclick="LudoGame.rollDice()" class="btn btn-gold" style="font-size:15px; padding:10px 22px; flex:1; justify-content:center;">
+              🎲 ROLL DICE
+            </button>
+          </div>
+          <div style="font-size:11px; color:var(--text-secondary); margin-top:6px; text-align:center;">
+            Tip: Press <strong>Spacebar</strong> or click the board center 🎲 anytime to roll!
+          </div>
+        </div>
+
+        <!-- COMPETITORS -->
+        <div class="card">
+          <div class="card-title">
+            <span>Competitors</span>
+            <button style="background:none; border:none; color:var(--accent-gold); font-size:11px; cursor:pointer;" onclick="openNameModal()">Change</button>
+          </div>
+          <div class="player-row">
+            <div class="player-identity">
+              <div id="avatarP1" class="player-avatar avatar-p1">P</div>
+              <span id="labelPlayer1" class="player-name-text">Player 1</span>
+            </div>
+            <span id="badgeP1Role" style="font-size:11px; color:#ff007f; font-weight:700;">Player 1</span>
+          </div>
+
+          <div class="player-row">
+            <div class="player-identity">
+              <div id="avatarP2" class="player-avatar avatar-p2">P</div>
+              <span id="labelPlayer2" class="player-name-text">Player 2</span>
+            </div>
+            <span id="badgeP2Role" style="font-size:11px; color:#00f3ff; font-weight:700;">Player 2</span>
+          </div>
+        </div>
+
+        <!-- SCORECARD -->
+        <div class="card">
+          <div class="card-title">
+            <span>Match Scorecard</span>
+            <span id="matchStateBadge" style="color:var(--accent-gold); font-size:11px;">Active</span>
+          </div>
+          <div class="score-grid">
+            <div class="score-tile">
+              <div id="statBox1Val" class="score-val" style="color:#ff007f;">0</div>
+              <div id="statBox1Label" class="score-label">Stat 1</div>
+            </div>
+            <div class="score-tile">
+              <div id="statBox2Val" class="score-val" style="color:#00f3ff;">0</div>
+              <div id="statBox2Label" class="score-label">Stat 2</div>
+            </div>
+            <div class="score-tile">
+              <div id="statBox3Val" class="score-val" style="color:#ffaa00;">0</div>
+              <div id="statBox3Label" class="score-label">Stat 3</div>
+            </div>
+            <div class="score-tile">
+              <div id="moveCountVal" class="score-val" style="color:#fbbf24;">0</div>
+              <div id="moveCountLabel" class="score-label">Total Moves</div>
+            </div>
+          </div>
+
+          <!-- P2 ACTIONS (For Coin to Win) -->
+          <div id="p2ActionSection" style="margin-top:14px; display:none;">
+            <div style="font-size:11px; color:var(--text-secondary); text-transform:uppercase; font-weight:700; margin-bottom:6px;">
+              <span id="p2ActionHeader">Player 2 Action</span>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button id="btnModePlace" class="mode-btn active" onclick="PuliMakaGame.setMode('place')">
+                📥 Place Reserve (<span id="btnReserveCount">16</span>)
+              </button>
+              <button id="btnModeMove" class="mode-btn" onclick="PuliMakaGame.setMode('move')" disabled>
+                🔄 Move on Board
+              </button>
+            </div>
+            <div id="phaseNote" style="font-size:11px; color:var(--accent-gold); margin-top:6px;">
+              ⚠️ Player 2 can only move on board after placing all reserve coins.
+            </div>
+          </div>
+        </div>
+
+        <!-- SIDEBAR ADSENSE SLOT -->
+        <div class="adsense-slot-wrapper sidebar-ad-slot">
+          <div class="adsense-placeholder side-placeholder">
+            <span class="ad-label">ADVERTISEMENT</span>
+            <p class="ad-subtext">Google AdSense Responsive Rectangle (300x250)</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- ================= BOTTOM ADSENSE BANNER CONTAINER ================= -->
+  <div class="adsense-slot-wrapper bottom-ad-slot">
+    <div class="adsense-placeholder">
+      <span class="ad-label">ADVERTISEMENT</span>
+      <p class="ad-subtext">Google AdSense Responsive Anchor / Bottom Banner</p>
+    </div>
+  </div>
+
+  <!-- PLAYER NAMES MODAL -->
+  <div id="nameModal" class="modal-backdrop">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <h3 style="font-size:17px; font-weight:800; color:#00f3ff;">Player Setup</h3>
+        <button style="background:none; border:none; color:var(--text-secondary); font-size:18px; cursor:pointer;" onclick="closeNameModal()">✕</button>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Player 1 Name</label>
+        <input type="text" id="inputP1Name" class="name-input" value="Player 1" />
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Player 2 Name</label>
+        <input type="text" id="inputP2Name" class="name-input" value="Player 2" />
+      </div>
+
+      <button class="btn btn-neon-blue" style="width:100%; justify-content:center; padding:10px; margin-top:10px;" onclick="savePlayerNames()">
+        Save Names & Play
+      </button>
+    </div>
+  </div>
+
+  <!-- WINNING / DRAW MODAL -->
+  <div id="winModal" class="modal-backdrop">
+    <div class="modal-card">
+      <div id="winTrophy" style="font-size:50px;">🏆</div>
+      <h2 id="winHeaderTitle" style="font-size:24px; font-weight:900; margin-top:8px;">MATCH RESULT</h2>
+      <div id="winPlayerName" style="font-size:24px; font-weight:900; margin:10px 0; color:#fff;">PLAYER</div>
+      <div id="winDetails" style="font-size:13px; color:#cbd5e1; margin-bottom:16px;">Details</div>
+      <div id="winCoinAward" style="background:rgba(34,197,94,0.15); border:1px solid rgba(34,197,94,0.4); border-radius:30px; padding:8px 18px; display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:800; color:#4ade80; margin-bottom:12px;">
+        <span>🪙</span>
+        <span id="winCoinText">+25 COINS CREDITED</span>
+      </div>
+
+      <!-- Network Ad Status Badge -->
+      <div id="winNetStatus" style="font-size:11px; font-weight:700; color:#38bdf8; margin-bottom:14px; font-family:'Orbitron', monospace; display:flex; align-items:center; justify-content:center; gap:6px;">
+        <span>🌐 Checking Network Connection...</span>
+      </div>
+
+      <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:8px;">
+        <button class="btn btn-gold" style="font-size:12px; padding:10px 16px;" onclick="AdBridge.showRewardedAd()">
+          📺 Watch Ad (+50 Coins)
+        </button>
+        <button class="btn btn-neon-blue" style="font-size:12px; padding:10px 20px;" onclick="closeWinModalAndReset()">
+          Play Next Match ↻
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GOOGLE ADMOB REWARDED & INTERSTITIAL MODAL (Native APK Bridge + Web Preview) -->
+  <div id="adSimulationModal" class="modal-backdrop">
+    <div class="modal-card" style="max-width: 420px; border-color:#f59e0b; box-shadow:0 0 35px rgba(245,158,11,0.35);">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid #1e293b; padding-bottom:8px;">
+        <span style="font-size:11px; font-weight:800; color:#f59e0b; letter-spacing:1px; font-family:'Orbitron', monospace;">
+          📢 GOOGLE ADMOB SPONSORED AD
+        </span>
+        <button id="adCloseBtn" style="background:none; border:none; color:#64748b; font-size:16px; cursor:pointer;" onclick="AdBridge.closeWebAd()">✕</button>
+      </div>
+
+      <div style="background:linear-gradient(135deg, #180d38, #070514); border:1px solid #334155; border-radius:12px; padding:24px 16px; margin-bottom:16px; position:relative; overflow:hidden;">
+        <div style="font-size:38px; margin-bottom:8px;">🎮</div>
+        <h3 id="adTitleText" style="font-size:18px; font-weight:900; color:#00f3ff; margin-bottom:6px; font-family:'Orbitron', monospace;">
+          Cyber Strike Mobile
+        </h3>
+        <p style="font-size:12px; color:#cbd5e1; line-height:1.4;">
+          Experience neon tactical battles on Google Play! Install today for exclusive hero skins.
+        </p>
+        <div style="margin-top:14px;">
+          <span style="display:inline-block; padding:4px 14px; background:#f59e0b; color:#0b0f17; font-size:11px; font-weight:800; border-radius:6px; font-family:'Orbitron', monospace;">
+            INSTALL FREE ▶
+          </span>
+        </div>
+      </div>
+
+      <!-- Live Countdown Status -->
+      <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(0,0,0,0.4); padding:8px 14px; border-radius:8px; border:1px solid #1e293b;">
+        <span id="adStatusText" style="font-size:12px; font-weight:700; color:#38bdf8;">
+          ⏳ Reward in 5s...
+        </span>
+        <span id="adTimerBadge" style="font-size:13px; font-weight:900; color:#f59e0b; font-family:'Orbitron', monospace;">
+          5s
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIRST-TIME MOBILE ONBOARDING SCREEN (Play as Guest or Login) -->
+  <div id="firstTimeWelcomeModal" class="modal-backdrop" style="background:rgba(5, 7, 18, 0.96); z-index:9999;">
+    <div class="modal-card" style="max-width: 420px; border-color:#00f3ff; box-shadow:0 0 50px rgba(0,243,255,0.35); padding:30px 24px;">
+      <div style="font-size:52px; margin-bottom:8px; filter:drop-shadow(0 0 16px rgba(0,243,255,0.6));">🎮</div>
+      <h2 style="font-size:22px; font-weight:900; color:#ffffff; font-family:'Orbitron', monospace; letter-spacing:1px; margin-bottom:4px;">
+        WELCOME TO TNK ARENA
+      </h2>
+      <p style="font-size:12px; color:#cbd5e1; line-height:1.5; margin-bottom:20px;">
+        Tactical Cyber Board Games: Coin to Win, Neon Ludo & Tic-Tac-Toe. Choose how you want to play:
+      </p>
+
+      <!-- Action Buttons -->
+      <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:16px;">
+        <!-- Option 1: Play as Guest (Go to Home screen & remember for next time) -->
+        <button onclick="handlePlayAsGuest()" class="btn btn-gold" style="width:100%; justify-content:center; padding:12px; font-size:14px; font-weight:800; border-radius:10px;">
+          ⚡ Play as Guest (Instant Access)
+        </button>
+
+        <!-- Option 2: Login (Coming Soon notification) -->
+        <button onclick="handleLoginClick()" class="btn btn-secondary" style="width:100%; justify-content:center; padding:12px; font-size:13px; font-weight:700; border-radius:10px; border-color:#38bdf8; color:#7dd3fc;">
+          🔐 Login Account
+        </button>
+      </div>
+
+      <!-- Feature Update Notification Banner -->
+      <div id="loginUpdateNotice" style="display:none; background:rgba(2,132,199,0.15); border:1px solid #38bdf8; border-radius:10px; padding:12px; margin-bottom:14px; text-align:left; animation:fadeIn 0.3s ease;">
+        <div style="font-size:12px; font-weight:800; color:#38bdf8; font-family:'Orbitron', monospace; margin-bottom:4px;">
+          🚀 Account Login Coming Soon!
+        </div>
+        <p style="font-size:11px; color:#cbd5e1; line-height:1.4; margin-bottom:8px;">
+          Cloud account syncing & online multiplayer ranks will be updated in the next version! You can play right now as a Guest with full access.
+        </p>
+        <button onclick="handlePlayAsGuest()" class="btn btn-neon-blue" style="font-size:11px; padding:6px 14px; width:100%; justify-content:center;">
+          Continue as Guest to Home Screen ▶
+        </button>
+      </div>
+
+      <div style="font-size:10px; color:#64748b; font-family:'Orbitron', monospace;">
+        TNK Games Arena • Mobile & APK Edition
+      </div>
+    </div>
+  </div>
+
+  <!-- LOAD INDEPENDENT GAME ENGINES -->
+  <script src="games/tictactoe.js"></script>
+  <script src="games/pulimaka.js"></script>
+  <script src="games/ludo.js"></script>
+
+  <!-- MAIN CORE PORTAL SCRIPT -->
+  <script>
+    let player1Name = "Player 1";
+    let player2Name = "Player 2";
+    let isAiMode = false;
+    let playerBalance = parseInt(localStorage.getItem("tnk_user_coins") || "100", 10);
+    const MATCH_WIN_REWARD = 25;
+
+    let ActiveGame = null;
+    let activeGameId = "pulimaka";
+
+    // Connectivity detector (Native Android Bridge or Browser online status)
+    function isOnline() {
+      if (window.AndroidBridge && typeof window.AndroidBridge.isConnectedToInternet === 'function') {
+        try {
+          return window.AndroidBridge.isConnectedToInternet();
+        } catch(e) {}
+      }
+      return typeof navigator.onLine === 'boolean' ? navigator.onLine : true;
+    }
+
+    // Horizontal games track smooth scroller
+    function scrollGamesTrack(direction) {
+      const track = document.getElementById("horizontalGamesTrack");
+      if (track) {
+        const offset = 280 * direction;
+        track.scrollBy({ left: offset, behavior: 'smooth' });
+      }
+    }
+
+    // Audio Engine
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playTone(freq, type = 'sine', duration = 0.12) {
+      try {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch(e) {}
+    }
+
+    function getP1Initial() { return player1Name.trim().charAt(0).toUpperCase() || "O"; }
+    function getP2Initial() { return isAiMode ? "AI" : (player2Name.trim().charAt(0).toUpperCase() || "X"); }
+
+    function showHubView() {
+      if (ActiveGame && ActiveGame.pauseTimer) ActiveGame.pauseTimer();
+      document.getElementById("homeHubView").style.display = "block";
+      document.getElementById("gameArenaView").style.display = "none";
+      document.getElementById("btnNavHub").style.display = "none";
+    }
+
+    function launchGameWithMode(gameId, mode) {
+      launchGame(gameId);
+      setMatchMode(mode);
+    }
+
+    function launchGame(gameId) {
+      activeGameId = gameId;
+      document.getElementById("homeHubView").style.display = "none";
+      document.getElementById("gameArenaView").style.display = "block";
+      document.getElementById("btnNavHub").style.display = "inline-flex";
+
+      // Reset Ludo-specific handy dice bars and timer visibility before switching
+      const headerDice = document.getElementById("headerLudoDiceBar");
+      const sideDice = document.getElementById("sidebarLudoDiceCard");
+      const timerBox = document.getElementById("arenaTimerBox");
+      const ludoStage = document.getElementById("ludoStageWrapper");
+      if (headerDice) headerDice.style.display = "none";
+      if (sideDice) sideDice.style.display = "none";
+      if (ludoStage) ludoStage.style.display = "none";
+      if (timerBox) timerBox.style.display = "flex";
+
+      if (gameId === "pulimaka") {
+        ActiveGame = PuliMakaGame;
+      } else if (gameId === "ludo") {
+        ActiveGame = LudoGame;
+      } else if (gameId === "tictactoe") {
+        ActiveGame = TicTacToeGame;
+      }
+
+      ActiveGame.init();
+    }
+
+    function setMatchMode(mode) {
+      isAiMode = (mode === 'AI');
+      document.getElementById('btnMode2P').classList.toggle('active', !isAiMode);
+      document.getElementById('btnModeAI').classList.toggle('active', isAiMode);
+
+      const p2Label = document.getElementById('labelPlayer2');
+      if (isAiMode) {
+        p2Label.textContent = "Computer (AI)";
+      } else {
+        p2Label.textContent = player2Name;
+      }
+      document.getElementById('avatarP2').textContent = getP2Initial();
+
+      if (ActiveGame && ActiveGame.setAiMode) {
+        ActiveGame.setAiMode(isAiMode);
+      }
+      if (ActiveGame && ActiveGame.reset) {
+        ActiveGame.reset();
+      }
+    }
+
+    function triggerStartGameOnBoard() {
+      if (ActiveGame && ActiveGame.startOnBoard) {
+        ActiveGame.startOnBoard();
+      }
+    }
+
+    // ========================================================
+    // CLIENT CYBER FIREWALL & WAF THREAT INSPECTOR
+    // ========================================================
+    const WebFirewall = {
+      blockedThreats: 0,
+      xssPattern: /(<script\b[^>]*>|javascript:|onerror\s*=|onload\s*=|eval\(|<iframe\b|<object\b|document\.cookie|document\.location|window\.location\s*=)/i,
+      sqliPattern: /(\b(UNION(\s+ALL)?|SELECT|DROP|INSERT|DELETE|UPDATE|ALTER|XP_)\b.*(--|\/\*|;|\bOR\b\s+["'\d]=["'\d]))/i,
+      traversalPattern: /(\.\.\/|\.\.\\|%2e%2e%2f)/i,
+
+      sanitize: function(input, fieldName) {
+        if (!input) return "";
+        let isThreat = false;
+        let threatType = "";
+
+        if (this.xssPattern.test(input)) {
+          isThreat = true;
+          threatType = "XSS Script Attack";
+        } else if (this.sqliPattern.test(input)) {
+          isThreat = true;
+          threatType = "SQL Injection Attack";
+        } else if (this.traversalPattern.test(input)) {
+          isThreat = true;
+          threatType = "Path Traversal Attack";
+        }
+
+        if (isThreat) {
+          this.blockedThreats++;
+          const badge = document.getElementById("fwThreatCount");
+          if (badge) badge.textContent = this.blockedThreats;
+          showAdToast("🛡️ Firewall Intercepted " + threatType + " in " + fieldName + "!");
+          // Sanitize strictly
+          return input.replace(/[<>'";&]/g, "").trim().slice(0, 16);
+        }
+
+        return input.replace(/[<>&]/g, "").trim().slice(0, 16);
+      }
+    };
+
+    // ========================================================
+    // FIRST-TIME MOBILE ONBOARDING LOGIC
+    // ========================================================
+    const STORAGE_KEY_ONBOARDED = "tnk_has_onboarded_v1";
+
+    function checkFirstTimeOnboarding() {
+      try {
+        const hasOnboarded = localStorage.getItem(STORAGE_KEY_ONBOARDED);
+        if (!hasOnboarded) {
+          // First time user: show onboarding screen
+          const welcomeModal = document.getElementById("firstTimeWelcomeModal");
+          if (welcomeModal) welcomeModal.classList.add("open");
+        }
+      } catch(e) {}
+    }
+
+    function handlePlayAsGuest() {
+      try {
+        localStorage.setItem(STORAGE_KEY_ONBOARDED, "guest");
+      } catch(e) {}
+      const welcomeModal = document.getElementById("firstTimeWelcomeModal");
+      if (welcomeModal) welcomeModal.classList.remove("open");
+      showHubView();
+      showAdToast("⚡ Playing as Guest! Welcome to TNK Arena!");
+    }
+
+    function handleLoginClick() {
+      const notice = document.getElementById("loginUpdateNotice");
+      if (notice) {
+        notice.style.display = "block";
+      }
+    }
+
+    function openNameModal() {
+      document.getElementById("inputP1Name").value = player1Name;
+      document.getElementById("inputP2Name").value = player2Name;
+      document.getElementById("nameModal").classList.add("open");
+    }
+    function closeNameModal() { document.getElementById("nameModal").classList.remove("open"); }
+    function savePlayerNames() {
+      const rawP1 = document.getElementById("inputP1Name").value;
+      const rawP2 = document.getElementById("inputP2Name").value;
+
+      // Pass both player names through Cyber Defense Firewall Sanitizer
+      const p1 = WebFirewall.sanitize(rawP1, "Player 1 Name");
+      const p2 = WebFirewall.sanitize(rawP2, "Player 2 Name");
+
+      if (p1) player1Name = p1;
+      if (p2) player2Name = p2;
+      document.getElementById("labelPlayer1").textContent = player1Name;
+      if (!isAiMode) document.getElementById("labelPlayer2").textContent = player2Name;
+      document.getElementById("avatarP1").textContent = getP1Initial();
+      document.getElementById("avatarP2").textContent = getP2Initial();
+      closeNameModal();
+      if (ActiveGame && ActiveGame.render) ActiveGame.render();
+    }
+
+    let winAdTimeout = null;
+
+    function triggerWinCelebration(winnerName, reason) {
+      if (ActiveGame && ActiveGame.pauseTimer) ActiveGame.pauseTimer();
+      playerBalance += MATCH_WIN_REWARD;
+      try { localStorage.setItem("tnk_user_coins", playerBalance.toString()); } catch(e) {}
+      document.getElementById("topWalletBalance").textContent = playerBalance;
+
+      document.getElementById("winPlayerName").textContent = winnerName.toUpperCase();
+      document.getElementById("winDetails").textContent = reason;
+      document.getElementById("winTrophy").textContent = "🏆";
+      
+      const netBadge = document.getElementById("winNetStatus");
+      if (netBadge) {
+        if (isOnline()) {
+          netBadge.innerHTML = "📶 Online • Victory Ad Starting Shortly...";
+          netBadge.style.borderColor = "rgba(56,189,248,0.4)";
+          netBadge.style.color = "#38bdf8";
+        } else {
+          netBadge.innerHTML = "📡 Offline Mode • Victory Ad Skipped";
+          netBadge.style.borderColor = "rgba(100,116,139,0.4)";
+          netBadge.style.color = "#94a3b8";
+        }
+      }
+
+      document.getElementById("winModal").classList.add("open");
+
+      playTone(523, 'triangle', 0.15);
+      setTimeout(() => playTone(659, 'triangle', 0.15), 160);
+      setTimeout(() => playTone(784, 'triangle', 0.3), 320);
+
+      startCelebrationAnimation();
+
+      // Trigger win ad ONLY if connected to internet
+      clearTimeout(winAdTimeout);
+      if (isOnline()) {
+        winAdTimeout = setTimeout(() => {
+          // If modal is still open, prompt winning ad
+          if (document.getElementById("winModal").classList.contains("open")) {
+            AdBridge.playWinningAdIfConnected();
+          }
+        }, 1800);
+      }
+    }
+
+    function triggerDrawModal(reason) {
+      if (ActiveGame && ActiveGame.pauseTimer) ActiveGame.pauseTimer();
+      document.getElementById("winPlayerName").textContent = "MATCH DRAW!";
+      document.getElementById("winDetails").textContent = reason;
+      document.getElementById("winTrophy").textContent = "🤝";
+      const netBadge = document.getElementById("winNetStatus");
+      if (netBadge) netBadge.innerHTML = "🤝 Fair Play Draw";
+      document.getElementById("winModal").classList.add("open");
+    }
+
+    function closeWinModalAndReset() {
+      clearTimeout(winAdTimeout);
+      document.getElementById("winModal").classList.remove("open");
+      stopCelebrationAnimation();
+      if (ActiveGame && ActiveGame.reset) ActiveGame.reset();
+      AdBridge.onMatchCompleted();
+    }
+
+    // Google AdMob & Monetization Bridge for Android APK and Web
+    const AdBridge = {
+      matchCount: 0,
+      activeAdType: null,
+      adTimer: null,
+      adSecondsLeft: 5,
+      canCloseAd: false,
+
+      // Dedicated win ad trigger verifying internet connectivity
+      playWinningAdIfConnected: function() {
+        if (!isOnline()) {
+          console.log("[AdMob Bridge] Device is offline; winning ad skipped.");
+          return;
+        }
+
+        // On Android APK, invoke native winning interstitial
+        if (window.AndroidBridge && typeof window.AndroidBridge.showWinningAd === 'function') {
+          window.AndroidBridge.showWinningAd();
+          return;
+        }
+        if (window.AndroidBridge && typeof window.AndroidBridge.showInterstitialAd === 'function') {
+          window.AndroidBridge.showInterstitialAd();
+          return;
+        }
+
+        // On Web browser, show interactive interstitial preview
+        AdBridge.triggerWebAd('interstitial');
+      },
+
+      showInterstitial: function() {
+        if (!isOnline()) return;
+        if (window.AndroidBridge && window.AndroidBridge.showInterstitialAd) {
+          window.AndroidBridge.showInterstitialAd();
+          return;
+        }
+        AdBridge.triggerWebAd('interstitial');
+      },
+
+      showRewardedAd: function() {
+        if (!isOnline()) {
+          showAdToast("⚠️ Connect to the internet to watch rewarded ads!");
+          return;
+        }
+        if (window.AndroidBridge && window.AndroidBridge.showRewardedAd) {
+          window.AndroidBridge.showRewardedAd();
+          return;
+        }
+        AdBridge.triggerWebAd('rewarded');
+      },
+
+      onRewardSuccess: function(coins) {
+        playerBalance += (coins || 50);
+        try { localStorage.setItem("tnk_user_coins", playerBalance.toString()); } catch(e) {}
+        const topBal = document.getElementById("topWalletBalance");
+        if (topBal) topBal.textContent = playerBalance;
+        playTone(784, 'triangle', 0.25);
+        showAdToast("🎉 +" + (coins || 50) + " Coins Added to Wallet!");
+      },
+
+      onMatchCompleted: function() {
+        AdBridge.matchCount++;
+        // Play regular ad every 2 completed matches only if online
+        if (AdBridge.matchCount % 2 === 0 && isOnline()) {
+          setTimeout(() => {
+            AdBridge.showInterstitial();
+          }, 350);
+        }
+      },
+
+      triggerWebAd: function(type) {
+        AdBridge.activeAdType = type;
+        AdBridge.adSecondsLeft = type === 'rewarded' ? 5 : 3;
+        AdBridge.canCloseAd = false;
+
+        const modal = document.getElementById("adSimulationModal");
+        const statusText = document.getElementById("adStatusText");
+        const timerBadge = document.getElementById("adTimerBadge");
+        const closeBtn = document.getElementById("adCloseBtn");
+
+        if (type === 'rewarded') {
+          statusText.textContent = "⏳ Watching Video Ad for +50 Coins...";
+          statusText.style.color = "#38bdf8";
+        } else {
+          statusText.textContent = "📢 Victory Match Ad (Google AdMob • Online)";
+          statusText.style.color = "#a855f7";
+        }
+
+        timerBadge.textContent = AdBridge.adSecondsLeft + "s";
+        closeBtn.style.opacity = "0.3";
+        modal.classList.add("open");
+
+        clearInterval(AdBridge.adTimer);
+        AdBridge.adTimer = setInterval(() => {
+          AdBridge.adSecondsLeft--;
+          if (AdBridge.adSecondsLeft > 0) {
+            timerBadge.textContent = AdBridge.adSecondsLeft + "s";
+          } else {
+            clearInterval(AdBridge.adTimer);
+            AdBridge.canCloseAd = true;
+            closeBtn.style.opacity = "1";
+            closeBtn.style.color = "#ffffff";
+            timerBadge.textContent = "✓ Ready";
+
+            if (AdBridge.activeAdType === 'rewarded') {
+              statusText.textContent = "🎉 Reward Granted! +50 Coins!";
+              statusText.style.color = "#4ade80";
+              AdBridge.onRewardSuccess(50);
+            } else {
+              statusText.textContent = "✓ Ad Finished. You may close now.";
+              statusText.style.color = "#4ade80";
+            }
+          }
+        }, 1000);
+      },
+
+      closeWebAd: function() {
+        if (!AdBridge.canCloseAd && AdBridge.adSecondsLeft > 1) {
+          return;
+        }
+        clearInterval(AdBridge.adTimer);
+        document.getElementById("adSimulationModal").classList.remove("open");
+      }
+    };
+
+    function showAdToast(msg) {
+      const toast = document.createElement("div");
+      toast.style.cssText = "position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#0f172a; border:1.5px solid #22c55e; color:#4ade80; padding:10px 20px; border-radius:30px; font-weight:800; font-size:13px; font-family:'Orbitron', monospace; z-index:9999; box-shadow:0 0 20px rgba(34,197,94,0.4); animation:fadeIn 0.3s ease;";
+      toast.textContent = msg;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 3200);
+    }
+
+    // Confetti Engine
+    const canvas = document.getElementById("celebrationCanvas");
+    const ctx = canvas.getContext("2d");
+    let animFrameId = null;
+    let particles = [];
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener("resize", resizeCanvas);
+
+    function startCelebrationAnimation() {
+      resizeCanvas();
+      canvas.style.display = "block";
+      particles = [];
+      const colors = ["#ff007f", "#00f3ff", "#9d00ff", "#ffaa00", "#00ff88", "#ffffff"];
+      for (let i = 0; i < 160; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * -canvas.height * 0.5,
+          w: Math.random() * 8 + 4,
+          h: Math.random() * 10 + 6,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vx: (Math.random() - 0.5) * 4,
+          vy: Math.random() * 4 + 3,
+          angle: Math.random() * 360,
+          rotSpeed: (Math.random() - 0.5) * 8
+        });
+      }
+      animateParticles();
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.angle += p.rotSpeed;
+        if (p.y > canvas.height) {
+          p.y = -10;
+          p.x = Math.random() * canvas.width;
+        }
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.angle * Math.PI) / 180);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      });
+      animFrameId = requestAnimationFrame(animateParticles);
+    }
+
+    function stopCelebrationAnimation() {
+      if (animFrameId) cancelAnimationFrame(animFrameId);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      canvas.style.display = "none";
+    }
+
+    // Allow pressing SPACEBAR to roll the dice in Ludo without moving the mouse
+    window.addEventListener("keydown", (e) => {
+      if (e.code === "Space" && activeGameId === "ludo" && document.getElementById("gameArenaView").style.display !== "none") {
+        // Don't trigger if typing inside the player name input modal
+        if (document.activeElement && document.activeElement.tagName === "INPUT") return;
+        e.preventDefault();
+        LudoGame.rollDice();
+      }
+    });
+
+    function initializeApp() {
+      showHubView();
+      checkFirstTimeOnboarding();
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initializeApp);
+    } else {
+      initializeApp();
+    }
+    window.addEventListener("load", initializeApp);
+  </script>
+</body>
+</html>
